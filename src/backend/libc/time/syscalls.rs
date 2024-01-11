@@ -160,7 +160,7 @@ pub(crate) fn clock_gettime_dynamic(id: DynamicClockId<'_>) -> io::Result<Timesp
             return Err(io::Errno::INVAL);
         }
 
-        #[cfg(linux_kernel)]
+        #[cfg(any(linux_kernel, target_os = "fuchsia"))]
         DynamicClockId::RealtimeAlarm => c::CLOCK_REALTIME_ALARM,
 
         #[cfg(linux_kernel)]
